@@ -22,7 +22,8 @@
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
-      var key = prompt("Chat Channel", "public")
+      var key = prompt("Encryption Key (Numeric)", "146");
+      function Encrypt(str) {
     if (!str) str = "";
     str = (str == "undefined" || str == "null") ? "" : str;
     try {
@@ -32,13 +33,11 @@
             ostr = ostr + String.fromCharCode(str.charCodeAt(pos) ^ key);
             pos += 1;
         }
-
         return ostr;
     } catch (ex) {
         return '';
     }
 }
-
 function Decrypt(str) {
     if (!str) str = "";
     str = (str == "undefined" || str == "null") ? "" : str;
@@ -49,7 +48,6 @@ function Decrypt(str) {
             ostr = ostr + String.fromCharCode(key ^ str.charCodeAt(pos));
             pos += 1;
         }
-
         return ostr;
     } catch (ex) {
         return '';
