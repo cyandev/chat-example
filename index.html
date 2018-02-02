@@ -22,7 +22,17 @@
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
-      var key = prompt("Chat Room:", "default");
+      function alphaToNum(inp) {
+    	  var out = "";
+        var i = 0;
+	      while(i < inp.length) {
+    	    out = out + inp.charCodeAt(i)
+          i = i + 1
+        }
+        return out
+      }
+      var room = prompt("Chat Room:", "default");
+      var key = alphaToNum(room)
       var user = prompt("Username:", "null");
       function Encrypt(str) {
     if (!str) str = "";
