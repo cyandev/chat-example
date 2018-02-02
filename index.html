@@ -65,9 +65,10 @@ function Decrypt(str) {
         return '';
     }
 }
-      socket.emit('chat message', Encrypt(appended + "." + user + " Joined the Room!")
+      
       $(function () {
         var socket = io();
+	socket.emit('chat message', Encrypt(appended + "." + user + " Joined the Room!")
         $('form').submit(function(){
           socket.emit('chat message', Encrypt(appended + "." + user + ": " + $('#m').val()));
           $('#m').val('');
