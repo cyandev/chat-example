@@ -74,8 +74,8 @@ function Decrypt(str) {
                 setTimeout(function(){ timeout = false; }, 2000);
                 socket.emit('chat message', Encrypt(appended + "." + user + ": " + $('#m').val()));
                 $('#m').val('');
-                return false;
           }
+	  return false;
         });
         socket.on('chat message', function(msg){
           var str = Decrypt(msg);
