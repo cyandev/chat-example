@@ -21,21 +21,49 @@
     </form>
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-    <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
     <script>
       var key = prompt("Chat Room:", "default");
       var user = prompt("Username:", "null");
+      function Encrypt(str) {
+    if (!str) str = "";
+    str = (str == "undefined" || str == "null") ? "" : str;
+    try {
+        var pos = 0;
+        ostr = '';
+        while (pos < str.length) {
+            ostr = ostr + String.fromCharCode(str.charCodeAt(pos) ^ (key*2));
+            pos += 1;
+        }
+        return ostr;
+    } catch (ex) {
+        return '';
+    }
+}
+function Decrypt(str) {
+    if (!str) str = "";
+    str = (str == "undefined" || str == "null") ? "" : str;
+    try {
+        var pos = 0;
+        ostr = '';
+        while (pos < str.length) {
+            ostr = ostr + String.fromCharCode((key*2) ^ str.charCodeAt(pos));
+            pos += 1;
+        }
+        return ostr;
+    } catch (ex) {
+        return '';
+    }
+}
       $(function () {
         var socket = io();
         $('form').submit(function(){
-          socket.emit('chat message', CryptoJS.AES.encrypt(key + user + ": " + $('#m').val(), key)
+          socket.emit('chat message', Encrypt(key + user + ": " + $('#m').val()));
           $('#m').val('');
           return false;
         });
         socket.on('chat message', function(msg){
-          var decryptedBytes = CryptoJS.AES.decrypt(msg, key);
-          var str = decryptedBytes.toString(CryptoJS.enc.Utf8);
-          if (str.includes(key + key) === true) {
+          var str = Decrypt(msg);
+          if (str.includes(key) === true) {
             $('#messages').append($('<li>').text(str.replace(key, "")));
             window.scrollTo(0, document.body.scrollHeight);
         }
