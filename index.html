@@ -77,7 +77,7 @@ function Decrypt(str) {
           var messagearray = str.split(".")
           var deappended = messagearray[0].substr(messagearray[0].length - key.length, key.length);
           if (deappended === key) {
-            $('#messages').append($('<li>').text(str.replace(messagearray[0], "")));
+            $('#messages').append($('<li>').text(str.replace(messagearray[0] + ".", "")));
             window.scrollTo(0, document.body.scrollHeight);
         }
         });
