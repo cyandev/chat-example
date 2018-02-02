@@ -34,7 +34,9 @@
       var room = prompt("Chat Room:", "default");
       var key = alphaToNum(room)
       var user = prompt("Username:", "null");
-      var appended = Math.floor(Math.random() * 20) +  1 + key
+      var value1 = (Math.floor(Math.random() * 40) + 10)
+      var value2 = (Math.floor(Math.random() * 40) + 10)
+      var appended = value1 + value2 + (value1+value2)
       var timeout = false
       function Encrypt(str) {
     if (!str) str = "";
@@ -80,8 +82,7 @@ function Decrypt(str) {
         socket.on('chat message', function(msg){
           var str = Decrypt(msg);
           var messagearray = str.split(".")
-          var deappended = messagearray[0].substr(messagearray[0].length - key.length, key.length);
-          if (deappended === key) {
+          if (parseInt(messagearray[0].substr(0, 2)) + parseInt(messagearray[0].substr(2, 2)) === parseInt(messagearray[0].substr(4, 2))) {
             $('#messages').append($('<li>').text(str.replace(messagearray[0] + ".", "")));
             window.scrollTo(0, document.body.scrollHeight);
         }
