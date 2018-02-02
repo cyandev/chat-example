@@ -31,7 +31,7 @@
         var pos = 0;
         ostr = '';
         while (pos < str.length) {
-            ostr = ostr + String.fromCharCode(str.charCodeAt(pos) ^ (key*2));
+            ostr = ostr + String.fromCharCode(str.charCodeAt(pos) ^ key);
             pos += 1;
         }
         return ostr;
@@ -46,7 +46,7 @@ function Decrypt(str) {
         var pos = 0;
         ostr = '';
         while (pos < str.length) {
-            ostr = ostr + String.fromCharCode((key*2) ^ str.charCodeAt(pos));
+            ostr = ostr + String.fromCharCode(key ^ str.charCodeAt(pos));
             pos += 1;
         }
         return ostr;
@@ -63,7 +63,7 @@ function Decrypt(str) {
         });
         socket.on('chat message', function(msg){
           var str = Decrypt(msg);
-          if (str.includes(key) === true) {
+          if (key + str.replace(key, "") === str) {
             $('#messages').append($('<li>').text(str.replace(key, "")));
             window.scrollTo(0, document.body.scrollHeight);
         }
