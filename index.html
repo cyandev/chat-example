@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>Socket.IO chat</title>
+    <title>EncrHat Chat</title>
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body { font: 13px Helvetica, Arial; }
@@ -35,6 +35,7 @@
       var key = alphaToNum(room)
       var user = prompt("Username:", "null");
       var appended = Math.floor(Math.random() * 20) +  1 + key
+      var timeout = false
       function Encrypt(str) {
     if (!str) str = "";
     str = (str == "undefined" || str == "null") ? "" : str;
@@ -68,9 +69,13 @@ function Decrypt(str) {
       $(function () {
         var socket = io();
         $('form').submit(function(){
-          socket.emit('chat message', Encrypt(appended + "." + user + ": " + $('#m').val()));
-          $('#m').val('');
-          return false;
+	  if(timeout === false) {
+                timeout = true
+                setTimeout(function(){ timeout = false; }, 2000);
+                socket.emit('chat message', Encrypt(appended + "." + user + ": " + $('#m').val()));
+                $('#m').val('');
+                return false;
+          }
         });
         socket.on('chat message', function(msg){
           var str = Decrypt(msg);
