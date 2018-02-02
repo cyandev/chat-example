@@ -57,13 +57,16 @@ function Decrypt(str) {
       $(function () {
         var socket = io();
         $('form').submit(function(){
-          socket.emit('chat message', Encrypt(user + ": " + $('#m').val()));
+          socket.emit('chat message', Encrypt(key + user + ": " + $('#m').val()));
           $('#m').val('');
           return false;
         });
         socket.on('chat message', function(msg){
-          $('#messages').append($('<li>').text(Decrypt(msg)));
-          window.scrollTo(0, document.body.scrollHeight);
+          var str = Decrypt(msg);
+          if (str.includes(key) === true) {
+            $('#messages').append($('<li>').text(str.replace(key, "")));
+            window.scrollTo(0, document.body.scrollHeight);
+        }
         });
       });
     </script>
