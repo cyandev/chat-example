@@ -34,6 +34,7 @@
       var room = prompt("Chat Room:", "default");
       var key = alphaToNum(room)
       var user = prompt("Username:", "null");
+      var appended = Math.floor(Math.random() * 20) +  1 + key
       function Encrypt(str) {
     if (!str) str = "";
     str = (str == "undefined" || str == "null") ? "" : str;
@@ -67,14 +68,16 @@ function Decrypt(str) {
       $(function () {
         var socket = io();
         $('form').submit(function(){
-          socket.emit('chat message', Encrypt(key + user + ": " + $('#m').val()));
+          socket.emit('chat message', Encrypt(appended + "." + user + ": " + $('#m').val()));
           $('#m').val('');
           return false;
         });
         socket.on('chat message', function(msg){
           var str = Decrypt(msg);
-          if (key + str.replace(key, "") === str) {
-            $('#messages').append($('<li>').text(str.replace(key, "")));
+          var messagearray = str.split(".")
+          var deappended = messagearray[0].substr(messagearray[0].length - key.length, key.length);
+          if (deappended === key) {
+            $('#messages').append($('<li>').text(str.replace(messagearray[0], "")));
             window.scrollTo(0, document.body.scrollHeight);
         }
         });
