@@ -55,6 +55,7 @@
     	        i = i + 1
         }
         key2 = output
+	console.log(key2)
      }
       function Encrypt(str) {
         console.log(key)
@@ -106,11 +107,12 @@ function Decrypt(str, code) {
         socket.on('chat message', function(msg){
           var i = 0
           while (key2.length < i) {
-          var str = Decrypt(msg, key2[i]);
-          var messagearray = str.split(".")
-          if (parseInt(messagearray[0].substr(0, 2)) + parseInt(messagearray[0].substr(2, 2)) === parseInt(messagearray[0].substr(4, 2))) {
-            $('#messages').append($('<li>').text(str.replace(messagearray[0] + ".", "")));
-            window.scrollTo(0, document.body.scrollHeight);
+          	var string = Decrypt(msg, key2[i]);
+		console.log(string)
+          	var messagearray = string.split(".")
+          	if (parseInt(messagearray[0].substr(0, 2)) + parseInt(messagearray[0].substr(2, 2)) === parseInt(messagearray[0].substr(4, 2))) {
+          	  $('#messages').append($('<li>').text(string.replace(messagearray[0] + ".", "")));
+          	  window.scrollTo(0, document.body.scrollHeight);
           }
         }
         });
