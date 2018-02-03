@@ -39,7 +39,7 @@
         }
         return out
       }
-      var key = alphaToNum("base")
+      var key = alphaToNum("Put Room Here")
       var user = prompt("Username:", "null");
       var timeout = false
       function updatekey() {
@@ -48,6 +48,7 @@
     	console.log(document.getElementById("key").value)
       }
       function Encrypt(str) {
+    console.log(key)
     if (!str) str = "";
     str = (str == "undefined" || str == "null") ? "" : str;
     try {
