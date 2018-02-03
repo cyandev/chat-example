@@ -41,10 +41,6 @@
       }
       var key = alphaToNum("base")
       var user = prompt("Username:", "null");
-      var value1 = (Math.floor(Math.random() * 40) + 10)
-      var value2 = (Math.floor(Math.random() * 40) + 10)
-      var appended = value1 + "" + value2 + "" + (value1+value2)
-      console.log(appended)
       var timeout = false
       function updatekey() {
     	key = alphaToNum(document.getElementById("key").value);
@@ -87,6 +83,9 @@ function Decrypt(str) {
 	  if(timeout === false) {
                 timeout = true
                 setTimeout(function(){ timeout = false; }, 2000);
+     		var value1 = (Math.floor(Math.random() * 40) + 10)
+      		var value2 = (Math.floor(Math.random() * 40) + 10)
+      		var appended = value1 + "" + value2 + "" + (value1+value2)
                 socket.emit('chat message', Encrypt(appended + "." + user + ": " + $('#m').val()));
 		console.log(appended + "." + user + ": " + $('#m').val())
                 $('#m').val('');
