@@ -39,7 +39,7 @@
         }
         return out
       }
-      var key = alphaToNum("Put Room Here")
+      var key = 0
       var user = prompt("Username:", "null");
       var timeout = false
       function updatekey() {
@@ -87,6 +87,7 @@ function Decrypt(str) {
      		var value1 = (Math.floor(Math.random() * 40) + 10)
       		var value2 = (Math.floor(Math.random() * 40) + 10)
       		var appended = value1 + "" + value2 + "" + (value1+value2)
+		console.log(key)
                 socket.emit('chat message', Encrypt(appended + "." + user + ": " + $('#m').val()));
 		console.log(appended + "." + user + ": " + $('#m').val())
                 $('#m').val('');
