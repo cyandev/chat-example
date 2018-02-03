@@ -37,6 +37,7 @@
       var value1 = (Math.floor(Math.random() * 40) + 10)
       var value2 = (Math.floor(Math.random() * 40) + 10)
       var appended = value1 + value2 + (value1+value2)
+      console.log(appended)
       var timeout = false
       function Encrypt(str) {
     if (!str) str = "";
@@ -75,6 +76,7 @@ function Decrypt(str) {
                 timeout = true
                 setTimeout(function(){ timeout = false; }, 2000);
                 socket.emit('chat message', Encrypt(appended + "." + user + ": " + $('#m').val()));
+		console.log(appended + "." + user + ": " + $('#m').val())
                 $('#m').val('');
           }
 	  return false;
@@ -82,6 +84,8 @@ function Decrypt(str) {
         socket.on('chat message', function(msg){
           var str = Decrypt(msg);
           var messagearray = str.split(".")
+	  console.log(parseInt(messagearray[0].substr(0, 2)) + parseInt(messagearray[0].substr(2, 2)))
+	  console.log(parseInt(messagearray[0].substr(4, 2)))
           if (parseInt(messagearray[0].substr(0, 2)) + parseInt(messagearray[0].substr(2, 2)) === parseInt(messagearray[0].substr(4, 2))) {
             $('#messages').append($('<li>').text(str.replace(messagearray[0] + ".", "")));
             window.scrollTo(0, document.body.scrollHeight);
