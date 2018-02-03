@@ -106,10 +106,10 @@ function Decrypt(str, code) {
         });
         socket.on('chat message', function(msg){
           var i = 0
-          while (key2.length > i) {
-		console.log("test")
+	  console.log(Decrypt(msg, key2[0])
+          while ((key2.length - 1) > i) {
           	var string = Decrypt(msg, key2[i]);
-		console.log(key2[i])
+		console.log(i)
 		console.log(string)
 		i = i + 1
           	var messagearray = string.split(".")
