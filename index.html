@@ -12,6 +12,13 @@
       #messages li { padding: 5px 10px; }
       #messages li:nth-child(odd) { background: #eee; }
       #messages { margin-bottom: 40px }
+      .top {
+        width: 100%;
+        z-index: 5;
+        position: absolute:
+        top: 0;
+        left: 50:
+      }
     </style>
   </head>
   <body>
@@ -31,14 +38,18 @@
         }
         return out
       }
-      var room = prompt("Chat Room:", "default");
-      var key = alphaToNum(room)
+      var key = alphaToNum("base")
       var user = prompt("Username:", "null");
       var value1 = (Math.floor(Math.random() * 40) + 10)
       var value2 = (Math.floor(Math.random() * 40) + 10)
       var appended = value1 + "" + value2 + "" + (value1+value2)
       console.log(appended)
       var timeout = false
+      function updatekey() {
+    	key = alphaToNum(document.getElementById("key").value);
+    	console.log(key)
+    	console.log(document.getElementById("key").value)
+      }
       function Encrypt(str) {
     if (!str) str = "";
     str = (str == "undefined" || str == "null") ? "" : str;
