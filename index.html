@@ -111,6 +111,7 @@ function Decrypt(str, code) {
           	var string = Decrypt(msg, key2[i]);
 		console.log(key2[i])
 		console.log(string)
+		i = i + 1
           	var messagearray = string.split(".")
           	if (parseInt(messagearray[0].substr(0, 2)) + parseInt(messagearray[0].substr(2, 2)) === parseInt(messagearray[0].substr(4, 2))) {
           	  $('#messages').append($('<li>').text(string.replace(messagearray[0] + ".", "")));
