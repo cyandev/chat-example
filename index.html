@@ -19,7 +19,8 @@
     </style>
   </head>
   <body>
-    <input type="text" id="key" class="top" onkeyup="updatekey()" value="Put Room Here">
+    <input type="text" id="key" class="top" onkeyup="updatekey()" value="Put Talking Room Here">
+    <input type="text" id="key2" class="top" onkeyup="updatekey2()" value="Put Listening Rooms Here Seperated By a comma eg. room,room2,room3">
     <ul id="messages"></ul>
     <form action="">
       <input id="m" autocomplete="off" /><button>Send</button>
@@ -37,6 +38,7 @@
         return out
       }
       var key = 0
+      var key2 = ""
       var user = prompt("Username:", "null");
       var timeout = false
       function updatekey() {
@@ -44,30 +46,40 @@
     	console.log(key)
     	console.log(document.getElementById("key").value)
       }
-      function Encrypt(str) {
-    console.log(key)
-    if (!str) str = "";
-    str = (str == "undefined" || str == "null") ? "" : str;
-    try {
-        var pos = 0;
-        ostr = '';
-        while (pos < str.length) {
-            ostr = ostr + String.fromCharCode(str.charCodeAt(pos) ^ key);
-            pos += 1;
+      function updatekey2() {
+        key2 = document.getElementById("key2").value.split(",")
+        var i = 0
+        var output = ""
+        while (i < key2.length) {
+    	        output = output + alphaToNum(key2[i]) + ","
+    	        i = i + 1
         }
-        return ostr;
-    } catch (ex) {
-        return '';
-    }
-}
-function Decrypt(str) {
+        key2 = output
+     }
+      function Encrypt(str) {
+        console.log(key)
+        if (!str) str = "";
+        str = (str == "undefined" || str == "null") ? "" : str;
+        try {
+            var pos = 0;
+            ostr = '';
+            while (pos < str.length) {
+                ostr = ostr + String.fromCharCode(str.charCodeAt(pos) ^ key);
+                pos += 1;
+            }
+            return ostr;
+        } catch (ex) {
+            return '';
+        }
+     }
+function Decrypt(str, code) {
     if (!str) str = "";
     str = (str == "undefined" || str == "null") ? "" : str;
     try {
         var pos = 0;
         ostr = '';
         while (pos < str.length) {
-            ostr = ostr + String.fromCharCode(key ^ str.charCodeAt(pos));
+            ostr = ostr + String.fromCharCode(code ^ str.charCodeAt(pos));
             pos += 1;
         }
         return ostr;
@@ -92,10 +104,8 @@ function Decrypt(str) {
 	  return false;
         });
         socket.on('chat message', function(msg){
-          var str = Decrypt(msg);
+          var str = Decrypt(msg, key);
           var messagearray = str.split(".")
-	  console.log(parseInt(messagearray[0].substr(0, 2)) + parseInt(messagearray[0].substr(2, 2)))
-	  console.log(parseInt(messagearray[0].substr(4, 2)))
           if (parseInt(messagearray[0].substr(0, 2)) + parseInt(messagearray[0].substr(2, 2)) === parseInt(messagearray[0].substr(4, 2))) {
             $('#messages').append($('<li>').text(str.replace(messagearray[0] + ".", "")));
             window.scrollTo(0, document.body.scrollHeight);
