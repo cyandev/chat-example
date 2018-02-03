@@ -105,6 +105,7 @@ function Decrypt(str, code) {
 	  return false;
         });
         socket.on('chat message', function(msg){
+	  console.log("test")
           var i = 0
           while (key2.length < i) {
           	var string = Decrypt(msg, key2[i]);
