@@ -1,4 +1,4 @@
-# EncrHat
+# EncrHat (Not Released)
 
 This is the source code for EncrHat, which is a secure chat client using end to end encyrption. EncrHat is a fork of chat-example from socketio which provides a very simple backend for a Socket.js based chat system.
 
