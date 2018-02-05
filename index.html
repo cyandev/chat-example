@@ -8,19 +8,21 @@
       form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
       form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
       form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages { list-style-type: none; margin: 0; padding: 0; width:100%;}
       #messages li { padding: 5px 10px; }
       #messages li:nth-child(odd) { background: #eee; }
       #messages { margin-bottom: 40px }
       .top {
         width: 100%;
-        z-index: 5;
+	height: 20px
+        position: fixed;
+	left: 0;
       }
     </style>
   </head>
   <body>
-    <input type="text" id="key" class="top" onkeyup="updatekey()" value="Put Talking Room Here">
-    <input type="text" id="key2" class="top" onkeyup="updatekey2()" value="Put Listening Rooms Here Seperated By a comma eg. room,room2,room3">
+    <input type="text" id="key" class="top" onkeyup="updatekey()" style="top: 0" value="Put Talking Room Here">
+    <input type="text" id="key2" class="top" onkeyup="updatekey2()" style="top: 20" value="Put Listening Rooms Here Seperated By a comma eg. room,room2,room3">
     <ul id="messages"></ul>
     <form action="">
       <input id="m" autocomplete="off" /><button>Send</button>
