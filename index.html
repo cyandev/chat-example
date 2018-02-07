@@ -32,6 +32,7 @@
     </form>
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
     <script>
       function alphaToNum(inp) {
     	  var out = "";
@@ -62,37 +63,6 @@
         key2 = output.split(",")
 	console.log(key2)
      }
-      function Encrypt(str) {
-        console.log(key)
-        if (!str) str = "";
-        str = (str == "undefined" || str == "null") ? "" : str;
-        try {
-            var pos = 0;
-            ostr = '';
-            while (pos < str.length) {
-                ostr = ostr + String.fromCharCode(str.charCodeAt(pos) ^ key);
-                pos += 1;
-            }
-            return ostr;
-        } catch (ex) {
-            return '';
-        }
-     }
-function Decrypt(str, code) {
-    if (!str) str = "";
-    str = (str == "undefined" || str == "null") ? "" : str;
-    try {
-        var pos = 0;
-        ostr = '';
-        while (pos < str.length) {
-            ostr = ostr + String.fromCharCode(code ^ str.charCodeAt(pos));
-            pos += 1;
-        }
-        return ostr;
-    } catch (ex) {
-        return '';
-    }
-}
       $(function () {
         var socket = io();
         $('form').submit(function(){
@@ -103,7 +73,7 @@ function Decrypt(str, code) {
       		var value2 = (Math.floor(Math.random() * 40) + 10)
       		var appended = value1 + "" + value2 + "" + (value1+value2)
 		console.log(key)
-                socket.emit('chat message', Encrypt(appended + "." + user + ": " + $('#m').val()));
+                socket.emit('chat message', CryptoJS.AES.encrypt(appended + "." + user + ": " + $('#m').val(), key));
 		console.log(appended + "." + user + ": " + $('#m').val())
                 $('#m').val('');
           }
@@ -111,10 +81,8 @@ function Decrypt(str, code) {
         });
         socket.on('chat message', function(msg){
           var i = 0
-	  console.log(Decrypt(msg, key2[0]))
-	  console.log(key2.length)
           while ((key2.length - 1) > i) {
-          	var string = Decrypt(msg, key2[i]);
+          	var string = CryptoJS.AES.decrypt(msg, key2[i]).toString(CryptoJS.enc.Utf8)
 		console.log(i)
 		console.log(key2[i])
 		console.log(string)
