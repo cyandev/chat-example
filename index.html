@@ -76,6 +76,7 @@
                 socket.emit('chat message', CryptoJS.AES.encrypt(appended + "." + user + ": " + $('#m').val(), key));
 		console.log(appended + "." + user + ": " + $('#m').val())
                 $('#m').val('');
+		return
           }
 	  return false;
         });
