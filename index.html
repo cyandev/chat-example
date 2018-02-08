@@ -57,15 +57,14 @@
       $(function () {
         var socket = io();
         $('form').submit(function(){
+	  console.log(CryptoJS.AES.encrypt(appended + "." + user + ": " + $('#m').val(), key))
 	  if(timeout === false) {
                 timeout = true
                 setTimeout(function(){ timeout = false; }, 2000);
      		var value1 = (Math.floor(Math.random() * 40) + 10)
       		var value2 = (Math.floor(Math.random() * 40) + 10)
       		var appended = value1 + "" + value2 + "" + (value1+value2)
-		console.log(key)
                 socket.emit('chat message', CryptoJS.AES.encrypt(appended + "." + user + ": " + $('#m').val(), key));
-		console.log(CryptoJS.AES.encrypt(appended + "." + user + ": " + $('#m').val(), key))
                 $('#m').val('');
 		return false;
           }
