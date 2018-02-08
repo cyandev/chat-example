@@ -55,6 +55,17 @@
         key2 = document.getElementById("key2").value.split(",")
 	console.log(key2);
      }
+     function encrypt (plaintext, encryptkey) {
+ 	 var text = plaintext.toString()
+ 	 var key = encryptkey.toString()
+	  var ciphertext = CryptoJS.AES.encrypt(text, key)
+ 	 return ciphertext
+    }
+    function decrypt (ciphertext,decryptkey) {
+  	var plaintext = CryptoJS.AES.decrypt(ciphertext, decryptkey)
+ 	return plaintext
+    }
+	    
       $(function () {
         var socket = io();
         $('form').submit(function(){
@@ -65,8 +76,7 @@
       		var value2 = (Math.floor(Math.random() * 40) + 10)
       		var appended = value1 + "" + value2 + "" + (value1+value2)
 		var myString = appended + "." + user + ": " + $('#m').val()
-		var myPassword = key
-		var encrypted = CryptoJS.AES.encrypt(myString, "pass");
+		var encrypted = encrypt(myString, key);
 		console.log(myPassword)
 		console.log(myString)
 		console.log(encrypted)
@@ -75,11 +85,10 @@
 		return false;
           }
 	  return false;
-        });
         socket.on('chat message', function(msg){
           var i = 0
           while ((key2.length - 1) > i) {
-          	var string = CryptoJS.AES.decrypt(msg, key2[i]).toString(CryptoJS.enc.Utf8)
+          	var string = decrypt(msg, key2[i])
 		console.log(key2[i])
 		console.log(string)
 		i = i + 1
