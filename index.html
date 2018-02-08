@@ -43,25 +43,16 @@
         }
         return out
       }
-      var key = 0
+      var key = ""
       var key2 = ""
       var user = prompt("Username:", "null");
       var timeout = false
       function updatekey() {
-    	key = alphaToNum(document.getElementById("key").value);
-    	console.log(key)
-    	console.log(document.getElementById("key").value)
+    	key = document.getElementById("key").value;
+    	console.log(key);
       }
       function updatekey2() {
         key2 = document.getElementById("key2").value.split(",")
-        var i = 0
-        var output = ""
-        while (i < key2.length) {
-    	        output = output + alphaToNum(key2[i]) + ","
-    	        i = i + 1
-        }
-        key2 = output.split(",")
-	console.log(key2)
      }
       $(function () {
         var socket = io();
@@ -74,9 +65,9 @@
       		var appended = value1 + "" + value2 + "" + (value1+value2)
 		console.log(key)
                 socket.emit('chat message', CryptoJS.AES.encrypt(appended + "." + user + ": " + $('#m').val(), key));
-		console.log(appended + "." + user + ": " + $('#m').val())
+		console.log(CryptoJS.AES.encrypt(appended + "." + user + ": " + $('#m').val(), key)
                 $('#m').val('');
-		return
+		return false;
           }
 	  return false;
         });
@@ -84,7 +75,6 @@
           var i = 0
           while ((key2.length - 1) > i) {
           	var string = CryptoJS.AES.decrypt(msg, key2[i]).toString(CryptoJS.enc.Utf8)
-		console.log(i)
 		console.log(key2[i])
 		console.log(string)
 		i = i + 1
