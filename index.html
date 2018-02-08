@@ -66,10 +66,10 @@
       		var appended = value1 + "" + value2 + "" + (value1+value2)
 		var myString = appended + "." + user + ": " + $('#m').val()
 		var myPassword = key
-		var encrypted = CryptoJS.AES.encrypt(myString, myPassword);
+		var encrypted = CryptoJS.AES.encrypt(myString, "pass");
 		console.log(myPassword)
 		console.log(myString)
-		console.log(encrypted)
+		console.log(key)
                 socket.emit('chat message',encrypted);
                 $('#m').val('');
 		return false;
