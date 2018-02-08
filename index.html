@@ -24,8 +24,8 @@
     <ul id="messages">
     <li></li>
     <li></li>
-    <li></li> 
-    <li></li>  
+    <li></li>
+    <li></li>
     </ul>
     <form action="">
       <input id="m" autocomplete="off" /><button>Send</button>
@@ -77,9 +77,6 @@
                 var appended = value1 + "" + value2 + "" + (value1 + value2)
                 var myString = appended + "." + user + ": " + $('#m').val()
                 var encrypted = encrypt(myString, key);
-                console.log(myPassword)
-                console.log(myString)
-                console.log(encrypted)
                 socket.emit('chat message', encrypted);
                 $('#m').val('');
                 return false;
