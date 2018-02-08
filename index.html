@@ -53,11 +53,11 @@
       }
       function updatekey2() {
         key2 = document.getElementById("key2").value.split(",")
+	console.log(key2);
      }
       $(function () {
         var socket = io();
         $('form').submit(function(){
-	  console.log(CryptoJS.AES.encrypt(appended + "." + user + ": " + $('#m').val(), key))
 	  if(timeout === false) {
                 timeout = true
                 setTimeout(function(){ timeout = false; }, 2000);
@@ -65,6 +65,7 @@
       		var value2 = (Math.floor(Math.random() * 40) + 10)
       		var appended = value1 + "" + value2 + "" + (value1+value2)
 		var encrypted = CryptoJS.AES.encrypt(appended + "." + user + ": " + $('#m').val(), key)
+		console.log(encrypted)
                 socket.emit('chat message',encrypted);
                 $('#m').val('');
 		return false;
