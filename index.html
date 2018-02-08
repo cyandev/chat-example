@@ -95,7 +95,9 @@
 		i = i + 1
           	var messagearray = string.split(".")
           	if (parseInt(messagearray[0].substr(0, 2)) + parseInt(messagearray[0].substr(2, 2)) === parseInt(messagearray[0].substr(4, 2))) {
-          	  $('#messages').append($('<li>').text(marked(string.replace(messagearray[0] + ".", ""))));
+          	      var node = document.createElement("div");
+    		      node.innerHTML = marked(string.replace(messagearray[0] + ".", ""))
+   		      document.getElementById("messages").appendChild(node);
           	  window.scrollTo(0, document.body.scrollHeight);
           }
         }
