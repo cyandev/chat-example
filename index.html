@@ -59,10 +59,12 @@
  	 var text = plaintext.toString()
  	 var key = encryptkey.toString()
 	 var ciphertext = CryptoJS.AES.encrypt(text, key).toString()
+	 console.log(ciphertext)
  	 return ciphertext
     }
     function decrypt (ciphertext,decryptkey) {
          var plaintext = CryptoJS.AES.decrypt(ciphertext, decryptkey).toString(CryptoJS.enc.Utf8)
+	 console.log(plaintext)
          return plaintext
      }
 	    
