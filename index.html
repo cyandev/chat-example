@@ -61,30 +61,31 @@
 	  var ciphertext = CryptoJS.AES.encrypt(text, key)
  	 return ciphertext
     }
-    function decrypt (ciphertext,decryptkey) {
-  	var plaintext = CryptoJS.AES.decrypt(ciphertext, decryptkey)
- 	return plaintext
-    }
+    function decrypt (ciphertext,decryptkey){
+         var plaintext = CryptoJS.AES.decrypt(ciphertext, decryptkey)
+         return plaintext
+     }
 	    
       $(function () {
         var socket = io();
         $('form').submit(function(){
-	  if(timeout === false) {
+            if (timeout === false) {
                 timeout = true
-                setTimeout(function(){ timeout = false; }, 2000);
-     		var value1 = (Math.floor(Math.random() * 40) + 10)
-      		var value2 = (Math.floor(Math.random() * 40) + 10)
-      		var appended = value1 + "" + value2 + "" + (value1+value2)
-		var myString = appended + "." + user + ": " + $('#m').val()
-		var encrypted = encrypt(myString, key);
-		console.log(myPassword)
-		console.log(myString)
-		console.log(encrypted)
-                socket.emit('chat message',encrypted);
+                setTimeout(function() { timeout = false; }, 2000);
+                var value1 = (Math.floor(Math.random() * 40) + 10)
+                var value2 = (Math.floor(Math.random() * 40) + 10)
+                var appended = value1 + "" + value2 + "" + (value1 + value2)
+                var myString = appended + "." + user + ": " + $('#m').val()
+                var encrypted = encrypt(myString, key);
+                console.log(myPassword)
+                console.log(myString)
+                console.log(encrypted)
+                socket.emit('chat message', encrypted);
                 $('#m').val('');
-		return false;
-          }
-	  return false;
+                return false;
+            }
+            return false;
+        });
         socket.on('chat message', function(msg){
           var i = 0
           while ((key2.length - 1) > i) {
