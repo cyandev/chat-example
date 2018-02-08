@@ -58,8 +58,7 @@
      function encrypt (plaintext, encryptkey) {
  	 var text = plaintext.toString()
  	 var key = encryptkey.toString()
-	  var ciphertext = CryptoJS.AES.encrypt(text, key).toString()
-	 console.log(ciphertext)
+	  var ciphertext = CryptoJS.AES.encrypt(text, key)
  	 return ciphertext
     }
     function decrypt (ciphertext,decryptkey){
@@ -84,17 +83,19 @@
             }
             return false;
         });
+        
         socket.on('chat message', function(msg){
           var i = 0
           while ((key2.length - 1) > i) {
           	var string = decrypt(msg, key2[i])
-		console.log(key2[i])
-		console.log(string)
-		i = i + 1
+          	console.log(string)
+            console.log(key2[i])
+            console.log(string)
+		    i = i + 1
           	var messagearray = string.split(".")
           	if (parseInt(messagearray[0].substr(0, 2)) + parseInt(messagearray[0].substr(2, 2)) === parseInt(messagearray[0].substr(4, 2))) {
-          	  $('#messages').append($('<li>').text(string.replace(messagearray[0] + ".", "")));
-          	  window.scrollTo(0, document.body.scrollHeight);
+          	    $('#messages').append($('<li>').text(string.replace(messagearray[0] + ".", "")));
+                window.scrollTo(0, document.body.scrollHeight);
           }
         }
         });
