@@ -24,8 +24,8 @@
     <ul id="messages">
     <li></li>
     <li></li>
-    <li></li>
-    <li></li>
+    <li></li> 
+    <li></li>  
     </ul>
     <form action="">
       <input id="m" autocomplete="off" /><button>Send</button>
@@ -83,19 +83,17 @@
             }
             return false;
         });
-        
         socket.on('chat message', function(msg){
           var i = 0
           while ((key2.length - 1) > i) {
           	var string = decrypt(msg, key2[i])
-          	console.log(string)
-            console.log(key2[i])
-            console.log(string)
-		    i = i + 1
+		console.log(key2[i])
+		console.log(string)
+		i = i + 1
           	var messagearray = string.split(".")
           	if (parseInt(messagearray[0].substr(0, 2)) + parseInt(messagearray[0].substr(2, 2)) === parseInt(messagearray[0].substr(4, 2))) {
-          	    $('#messages').append($('<li>').text(string.replace(messagearray[0] + ".", "")));
-                window.scrollTo(0, document.body.scrollHeight);
+          	  $('#messages').append($('<li>').text(string.replace(messagearray[0] + ".", "")));
+          	  window.scrollTo(0, document.body.scrollHeight);
           }
         }
         });
