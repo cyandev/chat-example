@@ -58,11 +58,11 @@
      function encrypt (plaintext, encryptkey) {
  	 var text = plaintext.toString()
  	 var key = encryptkey.toString()
-	  var ciphertext = CryptoJS.AES.encrypt(text, key)
+	 var ciphertext = CryptoJS.AES.encrypt(text, key).toString()
  	 return ciphertext
     }
-    function decrypt (ciphertext,decryptkey){
-         var plaintext = CryptoJS.AES.decrypt(ciphertext, decryptkey)
+    function decrypt (ciphertext,decryptkey) {
+         var plaintext = CryptoJS.AES.decrypt(ciphertext, decryptkey).toString(CryptoJS.enc.Utf8)
          return plaintext
      }
 	    
