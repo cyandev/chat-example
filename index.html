@@ -69,7 +69,7 @@
 		var encrypted = CryptoJS.AES.encrypt(myString, "pass");
 		console.log(myPassword)
 		console.log(myString)
-		console.log(key)
+		console.log(encrypted)
                 socket.emit('chat message',encrypted);
                 $('#m').val('');
 		return false;
