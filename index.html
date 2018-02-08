@@ -33,6 +33,7 @@
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+    <script src="https://cdn.rawgit.com/chjj/marked/735d4ceb/lib/marked.js"></script>
     <script>
       function alphaToNum(inp) {
     	  var out = "";
@@ -94,7 +95,7 @@
 		i = i + 1
           	var messagearray = string.split(".")
           	if (parseInt(messagearray[0].substr(0, 2)) + parseInt(messagearray[0].substr(2, 2)) === parseInt(messagearray[0].substr(4, 2))) {
-          	  $('#messages').append($('<li>').text(string.replace(messagearray[0] + ".", "")));
+          	  $('#messages').append($('<li>').text(marked(string.replace(messagearray[0] + ".", ""))));
           	  window.scrollTo(0, document.body.scrollHeight);
           }
         }
