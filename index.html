@@ -64,7 +64,8 @@
      		var value1 = (Math.floor(Math.random() * 40) + 10)
       		var value2 = (Math.floor(Math.random() * 40) + 10)
       		var appended = value1 + "" + value2 + "" + (value1+value2)
-                socket.emit('chat message', CryptoJS.AES.encrypt(appended + "." + user + ": " + $('#m').val(), key));
+		var encrypted = CryptoJS.AES.encrypt(appended + "." + user + ": " + $('#m').val(), key)
+                socket.emit('chat message',encrypted);
                 $('#m').val('');
 		return false;
           }
