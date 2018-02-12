@@ -80,7 +80,8 @@
                 var value1 = (Math.floor(Math.random() * 40) + 10)
                 var value2 = (Math.floor(Math.random() * 40) + 10)
                 var appended = value1 + "" + value2 + "" + (value1 + value2)
-                var myString = appended + "." + user + ": " + $('#m').val()
+		var message = $('#m').val()
+                var myString = appended + "." + user + ": " + message.substr(0,500)
                 var encrypted = encrypt(myString, key);
                 socket.emit('chat message', encrypted);
                 $('#m').val('');
@@ -98,7 +99,7 @@
           	var messagearray = string.split(".")
           	if (parseInt(messagearray[0].substr(0, 2)) + parseInt(messagearray[0].substr(2, 2)) === parseInt(messagearray[0].substr(4, 2))) {
           	      var node = document.createElement("div");
-    		      node.innerHTML = marked(string.replace(messagearray[0] + ".", ""))
+    		      node.innerHTML = marked(string.replace(messagearray[0] + ".", "").substr(0,500))
    		      document.getElementById("messages").appendChild(node);
           	  window.scrollTo(0, document.body.scrollHeight);
           }
