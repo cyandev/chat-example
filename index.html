@@ -18,11 +18,6 @@
         width: 100%;
 	height: 20px;
       }
-      svg {
-    	-ms-transform: translate(0px,9px); /* IE 9 */
-    	-webkit-transform: translate(0px,9px); /* Safari */
-    	transform: translate(0px,9px); /* Standard syntax */
-      }
     </style>
   </head>
   <body>
@@ -41,7 +36,6 @@
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
     <script src="https://cdn.rawgit.com/chjj/marked/735d4ceb/lib/marked.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jdenticon@1.8.0" async></script>
     <script>
       function alphaToNum(inp) {
     	  var out = "";
@@ -106,13 +100,11 @@
           	if (parseInt(messagearray[0].substr(0, 2)) + parseInt(messagearray[0].substr(2, 2)) === parseInt(messagearray[0].substr(4, 2))) {
           	      var node = document.createElement("div");
 		      var plaintext = string.replace(messagearray[0] + ".", "").substr(0,500)
-		      var usernamearray = plaintext.split(":")
 		      var p = document.createElement("p");
-		      p.textContent = plaintext;
+		      p.textContent = str;
 		      plaintext = p.innerHTML;
-    		      node.innerHTML = "<p><svg width="30" height="30" data-jdenticon-value=" + usernamearray[0] + ">/svg>" + marked(plaintext) + "</p>"
-   		      console.log(node.innerHTML)
-		      document.getElementById("messages").appendChild(node);
+    		      node.innerHTML = marked(plaintext)
+   		      document.getElementById("messages").appendChild(node);
           	  window.scrollTo(0, document.body.scrollHeight);
           }
         }
@@ -121,4 +113,3 @@
     </script>
   </body>
 </html>
-r
