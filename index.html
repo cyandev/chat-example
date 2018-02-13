@@ -101,7 +101,7 @@
           	      var node = document.createElement("div");
 		      var plaintext = string.replace(messagearray[0] + ".", "").substr(0,500)
 		      var p = document.createElement("p");
-		      p.textContent = str;
+		      p.textContent = plaintext;
 		      plaintext = p.innerHTML;
     		      node.innerHTML = marked(plaintext)
    		      document.getElementById("messages").appendChild(node);
