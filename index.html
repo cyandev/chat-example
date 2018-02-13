@@ -21,8 +21,8 @@
     </style>
   </head>
   <body>
-    <input type="text" id="key" class="top" style="position: fixed; left: 0; top: 0;" onkeyup="updatekey()" value="Put Talking Room Here">
-    <input type="text" id="key2" class="top" style="position: fixed; left: 0; top: 20px;" onkeyup="updatekey2()" value="Put Listening Rooms Here Seperated By a comma eg. room,room2,room3">
+    <input type="text" id="key" class="top" style="position: fixed; left: 0; top: 0;" onkeyup="updatekey()" value="Put Talking Room Here" onclick="this.select()">
+    <input type="text" id="key2" class="top" style="position: fixed; left: 0; top: 20px;" onkeyup="updatekey2()" value="Put Listening Rooms Here Seperated By a comma eg. room,room2,room3" onclick="this.select()">
     <ul id="messages">
     <li></li>
     <li></li>
@@ -48,7 +48,7 @@
         return out
       }
       var key = ""
-      var key2 = ""
+      var key2 = [""]
       var user = prompt("Username:", "null");
       var timeout = false
       function updatekey() {
