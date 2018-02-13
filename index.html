@@ -104,7 +104,7 @@
 		      var p = document.createElement("p");
 		      p.textContent = plaintext;
 		      plaintext = p.innerHTML;
-		      var outtxt = "<svg width="25" height="25" data-jdenticon-value="test"></svg>" + marked(plaintext)
+		      var outtxt = marked(plaintext)
 		      console.log(outtxt)
     		      node.innerHTML = outtxt
    		      document.getElementById("messages").appendChild(node);
