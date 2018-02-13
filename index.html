@@ -104,7 +104,9 @@
 		      var p = document.createElement("p");
 		      p.textContent = plaintext;
 		      plaintext = p.innerHTML;
-    		      node.innerHTML = marked(plaintext)
+		      var outtxt = "<svg width="25" height="25" data-jdenticon-value="**`DEVELOPER`** awes***X***"></svg>" + marked(plaintext)
+		      console.log(outtxt)
+    		      node.innerHTML = outtxt
    		      document.getElementById("messages").appendChild(node);
           	  window.scrollTo(0, document.body.scrollHeight);
           }
