@@ -59,7 +59,8 @@
       function updatekey() {
     	key = document.getElementById("key").value;
     	console.log(key);
-	key2 = document.getElementById("key2").value.split(",").push(key)
+	key2 = document.getElementById("key2").value.split(",")
+	key2.push(key)
 	console.log(key2)
       }
      function encrypt (plaintext, encryptkey) {
