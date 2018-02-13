@@ -23,10 +23,10 @@
     </style>
   </head>
   <body>
-    <input type="text" id="key" class="top" style="position: fixed; left: 0; top: 0;" onkeyup="updatekey()" value="Put Talking Room Here" onclick="this.select()">
+    <input type="text" id="key" class="top" style="position: fixed; left: 0; top: 0;" onkeyup="updatekey()" placeholder="Put Talking Room Here" onclick="this.select()">
     <button onclick='document.getElementById("advanced").classList.toggle("show")'  style="position: fixed; left: 0px; top: 20px;">Toggle Advanced</button>
     <div id="advanced" class="advanced">
-    <input type="text" id="key2" class="top" style="position: fixed; left: 115px; top: 20px;" onkeyup="updatekey2()" value="Put Listening Rooms Here Seperated By a comma eg. room,room2,room3" onclick="this.select()">
+    <input type="text" id="key2" class="top" style="position: fixed; left: 105px; top: 20px;" onkeyup="updatekey()" placeholder="Put Listening Rooms Here Seperated By a comma eg. room,room2,room3" onclick="this.select()">
     </div>
     <ul id="messages">
     <li></li>
@@ -59,11 +59,8 @@
       function updatekey() {
     	key = document.getElementById("key").value;
     	console.log(key);
+	key2 = document.getElementById("key2").value.split(",").push(key)
       }
-      function updatekey2() {
-        key2 = document.getElementById("key2").value.split(",")
-	console.log(key2);
-     }
      function encrypt (plaintext, encryptkey) {
  	 var text = plaintext.toString()
  	 var key = encryptkey.toString()
