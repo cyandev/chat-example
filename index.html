@@ -82,10 +82,6 @@
                 var appended = value1 + "" + value2 + "" + (value1 + value2)
 		var message = $('#m').val()
                 var myString = appended + "." + user + ": " + message.substr(0,500)
-		if (myString.contains("<")) {
-			alert("dont put HTML tags in your text");
-			return	
-		}
                 var encrypted = encrypt(myString, key);
                 socket.emit('chat message', encrypted);
                 $('#m').val('');
