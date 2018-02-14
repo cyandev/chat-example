@@ -108,7 +108,7 @@
 		      var p = document.createElement("p");
 		      p.textContent = plaintext;
 		      plaintext = p.innerHTML;
-		      var outtxt = marked(plaintext)
+		      var outtxt = key2[i] + ": " + marked(plaintext)
 		      console.log(outtxt)
     		      node.innerHTML = outtxt
    		      document.getElementById("messages").appendChild(node);
